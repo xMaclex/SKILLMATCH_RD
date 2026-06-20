@@ -1,0 +1,173 @@
+@{
+    ViewData["Title"] = "Inicio";
+    Layout = "_Layout";
+}
+
+<!-- HERO -->
+<section class="hero-section">
+    <div class="container text-center">
+        <span class="hero-badge mb-3 d-inline-block">ITLA &bull; República Dominicana</span>
+        <h1 class="mt-2">Conectamos Talento con Oportunidades</h1>
+        <p class="lead mt-3 mb-4">
+            Plataforma inteligente que conecta a estudiantes del ITLA y universidades técnicas
+            con empresas que buscan el perfil exacto para sus posiciones.
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a asp-controller="Estudiantes" asp-action="Registro"
+               class="btn btn-light btn-lg px-4" style="color:var(--sm-primary);font-weight:700;">
+                Soy Estudiante
+            </a>
+            <a asp-controller="Empresas" asp-action="Registro"
+               class="btn btn-outline-light btn-lg px-4">
+                Soy Empresa / Universidad
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ESTADÍSTICAS -->
+<section class="py-4 bg-white shadow-sm">
+    <div class="container">
+        <div class="row text-center g-2">
+            <div class="col-6 col-md-3">
+                <div class="stat-box">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Estudiantes Registrados</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-box">
+                    <div class="stat-number">80+</div>
+                    <div class="stat-label">Empresas Activas</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-box">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Ofertas Publicadas</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-box">
+                    <div class="stat-number">92%</div>
+                    <div class="stat-label">Tasa de Matching</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SELECCIÓN DE ROL -->
+<section class="py-5" style="background-color:#f8f9fa;">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-title">¿Cómo deseas usar SKILLMATCH RD?</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-md-4">
+                <div class="card role-card h-100 text-center p-4">
+                    <div class="card-body">
+                        <div class="card-icon">&#127891;</div>
+                        <h5 class="card-title">Soy Estudiante</h5>
+                        <p class="text-muted">
+                            Crea tu perfil, registra tus aptitudes y recibe recomendaciones
+                            de empleo y pasantías que se ajustan a tu carrera en el ITLA.
+                        </p>
+                        <a asp-controller="Estudiantes" asp-action="Registro" class="btn btn-skillmatch mt-2">
+                            Registrarme
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card role-card h-100 text-center p-4">
+                    <div class="card-body">
+                        <div class="card-icon">&#127970;</div>
+                        <h5 class="card-title">Soy Empresa</h5>
+                        <p class="text-muted">
+                            Publica tus vacantes y pasantías, define las aptitudes requeridas
+                            y el sistema te presentará los candidatos más compatibles.
+                        </p>
+                        <a asp-controller="Empresas" asp-action="Registro" class="btn btn-skillmatch mt-2">
+                            Registrar Empresa
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card role-card h-100 text-center p-4">
+                    <div class="card-body">
+                        <div class="card-icon">&#127979;</div>
+                        <h5 class="card-title">Soy Universidad / Instituto</h5>
+                        <p class="text-muted">
+                            Gestiona el portal de empleabilidad de tus estudiantes, monitorea
+                            colocaciones y conecta tu institución con el mercado laboral.
+                        </p>
+                        <a asp-controller="Empresas" asp-action="Registro" class="btn btn-skillmatch mt-2">
+                            Acceder
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-title">¿Cómo Funciona?</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="row g-4">
+
+            <div class="col-md-4 text-center">
+                <div class="mb-3" style="font-size:2.5rem;">&#9312;</div>
+                <h5 class="fw-bold" style="color:var(--sm-primary);">Crea tu Perfil</h5>
+                <p class="text-muted">
+                    El estudiante registra su carrera, semestre y habilidades técnicas y blandas.
+                    Las empresas publican sus vacantes con los requisitos exactos.
+                </p>
+            </div>
+
+            <div class="col-md-4 text-center">
+                <div class="mb-3" style="font-size:2.5rem;">&#9313;</div>
+                <h5 class="fw-bold" style="color:var(--sm-primary);">Motor de Matching</h5>
+                <p class="text-muted">
+                    Nuestro algoritmo calcula el porcentaje de compatibilidad entre el perfil
+                    del estudiante y cada oferta disponible.
+                </p>
+            </div>
+
+            <div class="col-md-4 text-center">
+                <div class="mb-3" style="font-size:2.5rem;">&#9314;</div>
+                <h5 class="fw-bold" style="color:var(--sm-primary);">Conectamos</h5>
+                <p class="text-muted">
+                    Las empresas reciben los mejores candidatos ordenados por compatibilidad.
+                    Los estudiantes aplican con un clic.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="py-5" style="background:linear-gradient(135deg,var(--sm-primary),var(--sm-accent));color:white;">
+    <div class="container text-center">
+        <h3 class="fw-bold mb-3">Empieza hoy mismo</h3>
+        <p class="mb-4 opacity-75">
+            SKILLMATCH RD es gratuito para estudiantes del ITLA y demás institutos técnicos superiores.
+        </p>
+        <a asp-controller="Estudiantes" asp-action="Registro"
+           class="btn btn-light btn-lg px-5 fw-bold" style="color:var(--sm-primary);">
+            Crear mi Perfil
+        </a>
+    </div>
+</section>

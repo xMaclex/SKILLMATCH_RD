@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Panel de Empresa";
+}
+
+<div class="page-header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>
+            <h2>Panel de Empresa</h2>
+            <p class="text-muted mb-0">Gestiona tus ofertas y revisa candidatos</p>
+        </div>
+        <a asp-controller="Ofertas" asp-action="Crear" class="btn btn-skillmatch">
+            + Publicar Oferta
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Ofertas Activas</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Solicitudes Recibidas</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Candidatos en Revision</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm text-center p-3">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Colocaciones</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm p-4">
+        <h5 class="fw-bold mb-3" style="color:var(--sm-primary);">Mis Ofertas Publicadas</h5>
+        <p class="text-muted">Aun no tienes ofertas publicadas. <a asp-controller="Ofertas" asp-action="Crear">Publica tu primera oferta</a>.</p>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+@model SKILLMATCH_RD.Models.Estudiante
+@{
+    ViewData["Title"] = "Registro de Estudiante";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h2>Registro de Estudiante</h2>
+        <p class="text-muted mb-0">Crea tu perfil y comienza a recibir recomendaciones personalizadas</p>
+    </div>
+</div>
+
+<div class="container" style="max-width:680px;">
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+        <form asp-action="Registro" method="post">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Nombre</label>
+                    <input type="text" class="form-control" asp-for="Nombre" placeholder="Tu nombre" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Apellido</label>
+                    <input type="text" class="form-control" asp-for="Apellido" placeholder="Tu apellido" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Matricula</label>
+                    <input type="text" class="form-control" asp-for="Matricula" placeholder="Ej: 2023-1100" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Correo Electronico</label>
+                    <input type="email" class="form-control" asp-for="Email" placeholder="tu@correo.com" required />
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label fw-semibold">Carrera</label>
+                    <select class="form-select" asp-for="Carrera" required>
+                        <option value="">-- Selecciona tu carrera --</option>
+                        <option>Desarrollo de Software</option>
+                        <option>Redes y Telecomunicaciones</option>
+                        <option>Soporte Tecnico</option>
+                        <option>Seguridad Informatica</option>
+                        <option>Diseno Grafico</option>
+                        <option>Administracion de Empresas</option>
+                        <option>Contabilidad</option>
+                        <option>Electronica</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Semestre Actual</label>
+                    <select class="form-select" asp-for="SemestreActual" required>
+                        <option value="">--</option>
+                        @for (int i = 1; i <= 8; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Descripcion personal</label>
+                    <textarea class="form-control" asp-for="Descripcion" rows="3"
+                              placeholder="Cuentanos brevemente sobre ti y tus objetivos profesionales..."></textarea>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" asp-for="BuscaPasantia" id="chkPasantia" />
+                        <label class="form-check-label" for="chkPasantia">
+                            Estoy buscando pasantia
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" asp-for="BuscaEmpleo" id="chkEmpleo" />
+                        <label class="form-check-label" for="chkEmpleo">
+                            Estoy buscando empleo
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <button type="submit" class="btn btn-skillmatch w-100 py-2">
+                        Crear mi Perfil
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

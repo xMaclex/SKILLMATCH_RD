@@ -1,0 +1,75 @@
+@model SKILLMATCH_RD.Models.Empresa
+@{
+    ViewData["Title"] = "Registro de Empresa";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h2>Registro de Empresa</h2>
+        <p class="text-muted mb-0">Comienza a conectar con el mejor talento tecnico del ITLA</p>
+    </div>
+</div>
+
+<div class="container" style="max-width:680px;">
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+        <form asp-action="Registro" method="post">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Nombre de la Empresa</label>
+                    <input type="text" class="form-control" asp-for="Nombre" placeholder="Nombre oficial" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Sector / Industria</label>
+                    <select class="form-select" asp-for="Sector" required>
+                        <option value="">-- Selecciona --</option>
+                        <option>Tecnologia y Software</option>
+                        <option>Telecomunicaciones</option>
+                        <option>Banca y Finanzas</option>
+                        <option>Comercio y Retail</option>
+                        <option>Salud</option>
+                        <option>Educacion</option>
+                        <option>Manufactura</option>
+                        <option>Turismo y Hoteleria</option>
+                        <option>Gobierno</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Ciudad</label>
+                    <select class="form-select" asp-for="Ciudad" required>
+                        <option value="">-- Selecciona --</option>
+                        <option>Santo Domingo</option>
+                        <option>Santiago</option>
+                        <option>La Romana</option>
+                        <option>San Pedro de Macoris</option>
+                        <option>San Francisco de Macoris</option>
+                        <option>Puerto Plata</option>
+                        <option>Otra</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Correo de Contacto</label>
+                    <input type="email" class="form-control" asp-for="Email" placeholder="rrhh@empresa.com" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Telefono</label>
+                    <input type="tel" class="form-control" asp-for="Telefono" placeholder="809-000-0000" />
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Descripcion de la Empresa</label>
+                    <textarea class="form-control" asp-for="Descripcion" rows="3"
+                              placeholder="Cuéntanos a que se dedica tu empresa..."></textarea>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Sitio Web (opcional)</label>
+                    <input type="url" class="form-control" asp-for="SitioWeb" placeholder="https://miempresa.com" />
+                </div>
+                <div class="col-12 mt-2">
+                    <button type="submit" class="btn btn-skillmatch w-100 py-2">
+                        Registrar Empresa
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

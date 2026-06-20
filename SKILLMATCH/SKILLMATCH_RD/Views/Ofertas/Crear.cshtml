@@ -1,0 +1,83 @@
+@model SKILLMATCH_RD.Models.Oferta
+@{
+    ViewData["Title"] = "Publicar Oferta";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h2>Publicar Nueva Oferta</h2>
+        <p class="text-muted mb-0">Define los requisitos y el sistema encontrara los mejores candidatos</p>
+    </div>
+</div>
+
+<div class="container" style="max-width:720px;">
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+        <form asp-action="Crear" method="post">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Titulo del Puesto</label>
+                    <input type="text" class="form-control" asp-for="Titulo"
+                           placeholder="Ej: Desarrollador .NET Junior" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Tipo de Oferta</label>
+                    <select class="form-select" asp-for="Tipo" required>
+                        <option value="">-- Selecciona --</option>
+                        <option value="0">Empleo</option>
+                        <option value="1">Pasantia</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Modalidad</label>
+                    <select class="form-select" asp-for="Modalidad">
+                        <option>Presencial</option>
+                        <option>Remoto</option>
+                        <option>Hibrido</option>
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label fw-semibold">Carrera Requerida</label>
+                    <select class="form-select" asp-for="CarreraRequerida" required>
+                        <option value="">-- Selecciona --</option>
+                        <option>Desarrollo de Software</option>
+                        <option>Redes y Telecomunicaciones</option>
+                        <option>Soporte Tecnico</option>
+                        <option>Seguridad Informatica</option>
+                        <option>Diseno Grafico</option>
+                        <option>Administracion de Empresas</option>
+                        <option>Contabilidad</option>
+                        <option>Cualquier Carrera</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Semestre Minimo</label>
+                    <select class="form-select" asp-for="SemestreMinimo">
+                        <option value="1">1ro</option>
+                        <option value="2">2do</option>
+                        <option value="3">3ro</option>
+                        <option value="4">4to</option>
+                        <option value="5">5to o mayor</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Descripcion del Puesto</label>
+                    <textarea class="form-control" asp-for="Descripcion" rows="4"
+                              placeholder="Describe las responsabilidades y el perfil ideal..." required></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Salario / Compensacion (opcional)</label>
+                    <input type="text" class="form-control" asp-for="Salario" placeholder="Ej: RD$25,000 mensual" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Fecha de Vencimiento</label>
+                    <input type="date" class="form-control" asp-for="FechaVencimiento" />
+                </div>
+                <div class="col-12 mt-2">
+                    <button type="submit" class="btn btn-skillmatch w-100 py-2">
+                        Publicar Oferta
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

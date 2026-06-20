@@ -1,0 +1,242 @@
+:root {
+    --sm-primary: #003087;
+    --sm-secondary: #C8102E;
+    --sm-accent: #0056D2;
+    --sm-light: #F0F4FF;
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar-skillmatch {
+    background-color: var(--sm-primary) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.navbar-skillmatch .navbar-brand {
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.navbar-skillmatch .nav-link {
+    color: rgba(255,255,255,0.85) !important;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.navbar-skillmatch .nav-link:hover {
+    color: #fff !important;
+}
+
+.navbar-skillmatch .navbar-toggler {
+    border-color: rgba(255,255,255,0.4);
+}
+
+/* Hero */
+.hero-section {
+    background: linear-gradient(135deg, var(--sm-primary) 0%, var(--sm-accent) 100%);
+    color: white;
+    padding: 80px 0 60px;
+}
+
+.hero-section h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.hero-section .lead {
+    font-size: 1.15rem;
+    opacity: 0.9;
+}
+
+.hero-badge {
+    background-color: var(--sm-secondary);
+    color: white;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Cards de selección de rol */
+.role-card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.role-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,48,135,0.15);
+}
+
+.role-card .card-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.role-card .card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--sm-primary);
+}
+
+/* Stats */
+.stat-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.stat-box .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--sm-primary);
+}
+
+.stat-box .stat-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Feature section */
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--sm-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+/* Section headings */
+.section-title {
+    font-weight: 800;
+    color: var(--sm-primary);
+    margin-bottom: 8px;
+}
+
+.section-divider {
+    width: 50px;
+    height: 4px;
+    background-color: var(--sm-secondary);
+    border-radius: 2px;
+    margin: 0 auto 32px;
+}
+
+/* Progress bar match */
+.match-bar .progress {
+    height: 10px;
+    border-radius: 6px;
+}
+
+/* Buttons */
+.btn-skillmatch {
+    background-color: var(--sm-primary);
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-skillmatch:hover {
+    background-color: var(--sm-accent);
+    color: white;
+}
+
+.btn-skillmatch-outline {
+    border: 2px solid var(--sm-primary);
+    color: var(--sm-primary);
+    background: transparent;
+    padding: 8px 26px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-skillmatch-outline:hover {
+    background-color: var(--sm-primary);
+    color: white;
+}
+
+/* Footer */
+.footer {
+    background-color: #f8f9fa;
+    padding: 16px 0;
+}
+
+/* Focus */
+.btn:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.15rem rgba(0,48,135,0.25);
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* Page header interno */
+.page-header {
+    background-color: var(--sm-light);
+    border-bottom: 3px solid var(--sm-primary);
+    padding: 32px 0 24px;
+    margin-bottom: 32px;
+}
+
+.page-header h2 {
+    font-weight: 800;
+    color: var(--sm-primary);
+}
+
+/* Badge tipo oferta */
+.badge-empleo {
+    background-color: var(--sm-primary);
+    color: white;
+}
+
+.badge-pasantia {
+    background-color: #0d9488;
+    color: white;
+}

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Avance 1 - SKILLMATCH RD</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11pt;
+    color: #1a1a1a;
+    background: #fff;
+    line-height: 1.6;
+  }
+
+  /* ─── PORTADA ─── */
+  .cover {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    page-break-after: always;
+    background: linear-gradient(160deg, #003087 0%, #0056D2 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cover .logo-text {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+
+  .cover .logo-sub {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    opacity: 0.8;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+  }
+
+  .cover .red-line {
+    width: 80px;
+    height: 5px;
+    background: #C8102E;
+    border-radius: 3px;
+    margin: 0 auto 50px;
+  }
+
+  .cover h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+
+  .cover .subtitle {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-bottom: 60px;
+  }
+
+  .cover-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 40px;
+    text-align: left;
+    background: rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 28px 36px;
+    width: 100%;
+    max-width: 580px;
+  }
+
+  .cover-grid .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.65;
+    margin-bottom: 2px;
+  }
+
+  .cover-grid .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  .itla-badge {
+    margin-top: 50px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-radius: 8px;
+    padding: 8px 24px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    opacity: 0.9;
+  }
+
+  /* ─── CONTENIDO ─── */
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 50px 40px;
+  }
+
+  /* TOC */
+  .toc {
+    background: #f0f4ff;
+    border-left: 5px solid #003087;
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    page-break-after: always;
+  }
+
+  .toc h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #003087;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+  }
+
+  .toc ol {
+    padding-left: 20px;
+  }
+
+  .toc li {
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+  }
+
+  .toc li a {
+    color: #003087;
+    text-decoration: none;
+  }
+
+  /* Secciones */
+  .section {
+    margin-bottom: 44px;
+    page-break-inside: avoid;
+  }
+
+  .section-number {
+    display: inline-block;
+    background: #003087;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .section h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #003087;
+    border-bottom: 3px solid #C8102E;
+    padding-bottom: 6px;
+    margin-bottom: 18px;
+  }
+
+  .section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0056D2;
+    margin: 18px 0 8px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    text-align: justify;
+  }
+
+  /* Tabla de estructura */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: #003087;
+    color: white;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e8edf5;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td {
+    background: #f7f9fd;
+  }
+
+  /* Módulos */
+  .module-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+
+  .module-card {
+    border: 1px solid #dbe4f7;
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: #f7f9fd;
+  }
+
+  .module-card .module-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #C8102E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .module-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #003087;
+    margin-bottom: 4px;
+  }
+
+  .module-card p {
+    font-size: 0.82rem;
+    color: #555;
+    margin: 0;
+  }
+
+  /* Tech stack */
+  .tech-badge {
+    display: inline-block;
+    background: #003087;
+    color: white;
+    border-radius: 5px;
+    padding: 3px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin: 3px 2px;
+  }
+
+  /* Roadmap */
+  .roadmap-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+
+  .roadmap-phase {
+    background: #003087;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+    min-width: 110px;
+    text-align: center;
+  }
+
+  .roadmap-content h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 2px;
+  }
+
+  .roadmap-content p {
+    font-size: 0.82rem;
+    color: #555;
+    margin: 0;
+  }
+
+  /* Status chips */
+  .chip {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .chip-done   { background: #d1fae5; color: #065f46; }
+  .chip-wip    { background: #fef3c7; color: #92400e; }
+  .chip-todo   { background: #e0e7ff; color: #3730a3; }
+
+  /* GitHub box */
+  .github-box {
+    border: 2px dashed #003087;
+    border-radius: 12px;
+    padding: 28px 32px;
+    text-align: center;
+    margin: 24px 0;
+    background: #f0f4ff;
+  }
+
+  .github-box h3 {
+    color: #003087;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .github-link-input {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    border: none;
+    border-bottom: 2px solid #003087;
+    background: transparent;
+    font-size: 1rem;
+    padding: 6px 4px;
+    text-align: center;
+    color: #003087;
+    outline: none;
+  }
+
+  .github-link-input::placeholder {
+    color: #aab4d0;
+  }
+
+  /* Firmas */
+  .signatures {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 50px;
+  }
+
+  .sig-box {
+    text-align: center;
+  }
+
+  .sig-line {
+    border-top: 2px solid #003087;
+    margin-top: 50px;
+    padding-top: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #003087;
+  }
+
+  .sig-sub {
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  /* Print */
+  @media print {
+    body { font-size: 10pt; }
+    .cover { min-height: 100vh; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ PORTADA ═══════════════════════ -->
+<div class="cover">
+  <div class="logo-text">SKILLMATCH RD</div>
+  <div class="logo-sub">Plataforma de Matching Laboral Universitario</div>
+  <div class="red-line"></div>
+
+  <h1>Avance 1: Inicio del Proyecto y Configuración Base</h1>
+  <p class="subtitle">Proyecto Final TDS &mdash; Instituto Tecnológico de Las Américas (ITLA)</p>
+
+  <div class="cover-grid">
+    <div>
+      <div class="label">Integrante 1</div>
+      <div class="value">Adrian Reyes</div>
+    </div>
+    <div>
+      <div class="label">Matrícula</div>
+      <div class="value">2023-1100</div>
+    </div>
+    <div>
+      <div class="label">Integrante 2</div>
+      <div class="value">Michael Sanchez</div>
+    </div>
+    <div>
+      <div class="label">Matrícula</div>
+      <div class="value">2019-9132</div>
+    </div>
+    <div>
+      <div class="label">Materia</div>
+      <div class="value">Proyecto Final TDS</div>
+    </div>
+    <div>
+      <div class="label">Maestro</div>
+      <div class="value">Willis Ezequiel Polanco Caraballo</div>
+    </div>
+    <div>
+      <div class="label">Fecha de Entrega</div>
+      <div class="value">19 de junio de 2026</div>
+    </div>
+    <div>
+      <div class="label">Avance</div>
+      <div class="value">Avance 1 de 3</div>
+    </div>
+  </div>
+
+  <div class="itla-badge">INSTITUTO TECNOLÓGICO DE LAS AMÉRICAS &mdash; ITLA</div>
+</div>
+
+<!-- ═══════════════════════ CONTENIDO ═══════════════════════ -->
+<div class="content">
+
+  <!-- TABLA DE CONTENIDO -->
+  <div class="toc">
+    <h2>Tabla de Contenido</h2>
+    <ol>
+      <li><a href="#s1">Descripción General del Proyecto</a></li>
+      <li><a href="#s2">Repositorio en GitHub</a></li>
+      <li><a href="#s3">Estructura Inicial del Proyecto</a></li>
+      <li><a href="#s4">Módulos Creados</a></li>
+      <li><a href="#s5">Configuración del Entorno de Desarrollo</a></li>
+      <li><a href="#s6">Roadmap Técnico</a></li>
+      <li><a href="#s7">Metodología de Organización (POO)</a></li>
+      <li><a href="#s8">Estado del Avance 1</a></li>
+    </ol>
+  </div>
+
+  <!-- ─── 1. DESCRIPCIÓN ─── -->
+  <div class="section" id="s1">
+    <div class="section-number">Sección 01</div>
+    <h2>Descripción General del Proyecto</h2>
+
+    <p>
+      <strong>SKILLMATCH RD</strong> es una plataforma web inteligente diseñada para conectar a
+      estudiantes del <strong>Instituto Tecnológico de Las Américas (ITLA)</strong> y otras
+      universidades técnicas superiores de la República Dominicana con empresas que buscan
+      talento calificado para posiciones específicas de empleo y pasantías.
+    </p>
+
+    <p>
+      A diferencia de los portales de empleo tradicionales, SKILLMATCH RD implementa un
+      <strong>motor de matching por aptitudes</strong>: las empresas definen las habilidades
+      requeridas para cada vacante, y el sistema calcula automáticamente el porcentaje de
+      compatibilidad con cada estudiante registrado, eliminando la necesidad de que el
+      estudiante busque oportunidades por su cuenta.
+    </p>
+
+    <h3>Enfoque del Proyecto (Pivote respecto a Propuesta Inicial)</h3>
+    <p>
+      Tras el análisis inicial, se decidió enfocar la plataforma en tres actores principales:
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Actor</th><th>Rol en la Plataforma</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Estudiante ITLA / Técnico Superior</strong></td>
+          <td>Crea su perfil con carrera, semestre y aptitudes. Recibe recomendaciones automáticas de empleos y pasantías ordenadas por compatibilidad.</td>
+        </tr>
+        <tr>
+          <td><strong>Empresa</strong></td>
+          <td>Publica vacantes con los requisitos exactos. El sistema le presenta los candidatos más compatibles sin búsqueda manual.</td>
+        </tr>
+        <tr>
+          <td><strong>Universidad / Instituto</strong></td>
+          <td>Accede al portal institucional para monitorear la colocación laboral de sus estudiantes y gestionar convenios con empresas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 2. REPOSITORIO ─── -->
+  <div class="section" id="s2">
+    <div class="section-number">Sección 02</div>
+    <h2>Repositorio en GitHub</h2>
+
+    <p>
+      El código fuente del proyecto se gestiona mediante <strong>Git</strong> y está alojado
+      en <strong>GitHub</strong>. El repositorio es el punto central de colaboración entre
+      los dos integrantes del equipo, donde se registran todos los cambios, ramas de
+      desarrollo y versiones del proyecto.
+    </p>
+
+    <div class="github-box">
+      <h3>&#128279; Enlace al Repositorio GitHub</h3>
+      <p style="font-size:0.85rem;color:#666;margin-bottom:16px;">
+        Coloca aquí el link del repositorio una vez creado en GitHub:
+      </p>
+      <input class="github-link-input" type="text"
+             placeholder="https://github.com/usuario/skillmatch-rd"
+             value="https://github.com/xMaclex/SKILLMATCH_RD" />
+      <p style="margin-top:14px;font-size:0.8rem;color:#888;">
+        Repositorio: <strong>xMaclex/SKILLMATCH_RD</strong> &bull;
+        Rama principal: <strong>main</strong>
+      </p>
+    </div>
+
+    <h3>Convención de Ramas</h3>
+    <table>
+      <thead>
+        <tr><th>Rama</th><th>Propósito</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>main</code></td><td>Código estable, versiones de entrega</td></tr>
+        <tr><td><code>develop</code></td><td>Integración de nuevas funcionalidades</td></tr>
+        <tr><td><code>feature/nombre</code></td><td>Desarrollo de módulos específicos</td></tr>
+        <tr><td><code>fix/nombre</code></td><td>Corrección de errores</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Colaboradores</h3>
+    <table>
+      <thead>
+        <tr><th>Integrante</th><th>Rol</th><th>GitHub Username</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Adrian Reyes (2023-1100)</td>
+          <td>Tech Lead &mdash; Backend + Arquitectura</td>
+          <td>@adrianreyes</td>
+        </tr>
+        <tr>
+          <td>Michael Sanchez (2019-9132)</td>
+          <td>Frontend + QA / Testing</td>
+          <td>@michaelsanchez</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 3. ESTRUCTURA ─── -->
+  <div class="section" id="s3">
+    <div class="section-number">Sección 03</div>
+    <h2>Estructura Inicial del Proyecto</h2>
+
+    <p>
+      El proyecto sigue el patrón <strong>MVC (Modelo-Vista-Controlador)</strong> provisto
+      por <strong>ASP.NET Core</strong>, organizado bajo metodología de
+      <strong>Programación Orientada a Objetos (POO)</strong>.
+    </p>
+
+    <h3>Árbol de Carpetas</h3>
+    <table>
+      <thead>
+        <tr><th>Carpeta / Archivo</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>SKILLMATCH_RD/</code></td><td>Raíz del proyecto ASP.NET Core MVC</td></tr>
+        <tr><td><code>├── Controllers/</code></td><td>Controladores MVC (lógica de navegación)</td></tr>
+        <tr><td><code>│   ├── HomeController.cs</code></td><td>Landing page y páginas generales</td></tr>
+        <tr><td><code>│   ├── EstudiantesController.cs</code></td><td>Módulo de estudiantes</td></tr>
+        <tr><td><code>│   ├── EmpresasController.cs</code></td><td>Módulo de empresas</td></tr>
+        <tr><td><code>│   ├── OfertasController.cs</code></td><td>Gestión de ofertas laborales</td></tr>
+        <tr><td><code>│   └── SolicitudesController.cs</code></td><td>Gestión de postulaciones</td></tr>
+        <tr><td><code>├── Models/</code></td><td>Clases de dominio (POO)</td></tr>
+        <tr><td><code>│   ├── Enums/</code></td><td>Enumeraciones del sistema</td></tr>
+        <tr><td><code>│   │   ├── TipoOferta.cs</code></td><td>Empleo / Pasantía</td></tr>
+        <tr><td><code>│   │   ├── EstadoSolicitud.cs</code></td><td>Pendiente / EnRevision / Aceptada / Rechazada</td></tr>
+        <tr><td><code>│   │   └── TipoUsuario.cs</code></td><td>Estudiante / Empresa / Universidad / Admin</td></tr>
+        <tr><td><code>│   ├── Estudiante.cs</code></td><td>Clase: datos del candidato</td></tr>
+        <tr><td><code>│   ├── Empresa.cs</code></td><td>Clase: datos de la empresa</td></tr>
+        <tr><td><code>│   ├── Oferta.cs</code></td><td>Clase: vacante o pasantía</td></tr>
+        <tr><td><code>│   ├── Aptitud.cs</code></td><td>Clase: habilidad técnica o blanda</td></tr>
+        <tr><td><code>│   ├── Universidad.cs</code></td><td>Clase: institución educativa</td></tr>
+        <tr><td><code>│   ├── Solicitud.cs</code></td><td>Clase: postulación estudiante-oferta</td></tr>
+        <tr><td><code>│   └── MatchResult.cs</code></td><td>Clase: resultado del algoritmo de matching</td></tr>
+        <tr><td><code>├── Views/</code></td><td>Vistas Razor (.cshtml)</td></tr>
+        <tr><td><code>│   ├── Home/</code></td><td>Landing page principal</td></tr>
+        <tr><td><code>│   ├── Estudiantes/</code></td><td>Registro, Perfil, MisOfertas</td></tr>
+        <tr><td><code>│   ├── Empresas/</code></td><td>Registro, Dashboard, Candidatos</td></tr>
+        <tr><td><code>│   ├── Ofertas/</code></td><td>Listado, Crear, Detalle</td></tr>
+        <tr><td><code>│   ├── Solicitudes/</code></td><td>Gestión de postulaciones</td></tr>
+        <tr><td><code>│   └── Shared/</code></td><td>Layout principal y parciales compartidos</td></tr>
+        <tr><td><code>├── wwwroot/</code></td><td>Archivos estáticos (CSS, JS, imágenes)</td></tr>
+        <tr><td><code>│   ├── css/site.css</code></td><td>Estilos personalizados SKILLMATCH RD</td></tr>
+        <tr><td><code>│   └── lib/</code></td><td>Bootstrap 5, jQuery</td></tr>
+        <tr><td><code>├── Program.cs</code></td><td>Punto de entrada y configuración de servicios</td></tr>
+        <tr><td><code>├── appsettings.json</code></td><td>Configuración de ambiente (conexión BD, logging)</td></tr>
+        <tr><td><code>└── SKILLMATCH_RD.csproj</code></td><td>Definición del proyecto .NET 10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 4. MÓDULOS ─── -->
+  <div class="section" id="s4">
+    <div class="section-number">Sección 04</div>
+    <h2>Pantallas y Módulos Creados</h2>
+
+    <p>
+      En este primer avance se crearon las pantallas base de los 7 módulos principales del sistema.
+      Algunas están funcionales como formularios y otras sirven como estructura para el desarrollo
+      progresivo.
+    </p>
+
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="module-num">Módulo 01</div>
+        <h4>Landing Page</h4>
+        <p>Página principal con hero section, estadísticas, selección de rol (Estudiante / Empresa / Universidad) y sección "Cómo Funciona".</p>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 02</div>
+        <h4>Registro de Estudiante</h4>
+        <p>Formulario completo: nombre, matrícula, carrera, semestre, búsqueda de empleo/pasantía. Listo para envío de datos.</p>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 03</div>
+        <h4>Registro de Empresa</h4>
+        <p>Formulario con sector, ciudad, correo, descripción y sitio web. Conectado al controlador EmpresasController.</p>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 04</div>
+        <h4>Dashboard Empresa</h4>
+        <p>Panel con estadísticas (Ofertas activas, Solicitudes, Candidatos, Colocaciones) y listado de ofertas publicadas.</p>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 05</div>
+        <h4>Publicar Oferta</h4>
+        <p>Formulario para crear vacantes: título, tipo (empleo/pasantía), carrera requerida, semestre mínimo, modalidad y salario.</p>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 06</div>
+        <h4>Listado de Ofertas</h4>
+        <p>Vista con filtros por tipo y carrera. Muestra cards de ofertas con badges de aptitudes requeridas y botón de detalle.</p>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 07</div>
+        <h4>Motor de Matching</h4>
+        <p>Arquitectura definida (clase MatchResult con PorcentajeCompatibilidad, NivelMatch, AptitudesCoincidentes). Implementación en Avance 2.</p>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Módulo 08</div>
+        <h4>Gestión de Solicitudes</h4>
+        <p>Controlador y vista creados. Flujo: Estudiante aplica → Empresa revisa → Estado se actualiza. Implementación en Avance 2.</p>
+      </div>
+    </div>
+
+    <h3>Vistas Razor Creadas</h3>
+    <table>
+      <thead>
+        <tr><th>Ruta de Vista</th><th>Descripción</th><th>Estado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>Views/Home/Index.cshtml</code></td><td>Landing page completa con branding SKILLMATCH RD</td><td><span class="chip chip-done">Listo</span></td></tr>
+        <tr><td><code>Views/Estudiantes/Registro.cshtml</code></td><td>Formulario de registro estudiantil</td><td><span class="chip chip-done">Listo</span></td></tr>
+        <tr><td><code>Views/Estudiantes/Index.cshtml</code></td><td>Perfil del estudiante</td><td><span class="chip chip-wip">Base creada</span></td></tr>
+        <tr><td><code>Views/Estudiantes/MisOfertas.cshtml</code></td><td>Recomendaciones con % de match</td><td><span class="chip chip-wip">Base creada</span></td></tr>
+        <tr><td><code>Views/Empresas/Registro.cshtml</code></td><td>Formulario de registro empresarial</td><td><span class="chip chip-done">Listo</span></td></tr>
+        <tr><td><code>Views/Empresas/Dashboard.cshtml</code></td><td>Panel de control empresa</td><td><span class="chip chip-done">Listo</span></td></tr>
+        <tr><td><code>Views/Ofertas/Index.cshtml</code></td><td>Listado de ofertas con filtros</td><td><span class="chip chip-done">Listo</span></td></tr>
+        <tr><td><code>Views/Ofertas/Crear.cshtml</code></td><td>Publicar nueva vacante / pasantía</td><td><span class="chip chip-done">Listo</span></td></tr>
+        <tr><td><code>Views/Solicitudes/Index.cshtml</code></td><td>Gestión de postulaciones</td><td><span class="chip chip-wip">Base creada</span></td></tr>
+        <tr><td><code>Views/Shared/_Layout.cshtml</code></td><td>Layout con navbar y footer SKILLMATCH</td><td><span class="chip chip-done">Listo</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 5. ENTORNO ─── -->
+  <div class="section" id="s5">
+    <div class="section-number">Sección 05</div>
+    <h2>Configuración del Entorno de Desarrollo</h2>
+
+    <h3>Stack Tecnológico</h3>
+
+    <table>
+      <thead>
+        <tr><th>Capa</th><th>Tecnología</th><th>Versión</th><th>Propósito</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Framework</td><td>ASP.NET Core MVC</td><td>.NET 10</td><td>Framework principal del backend y frontend</td></tr>
+        <tr><td>Lenguaje</td><td>C#</td><td>13.0</td><td>Lógica de negocio y modelos POO</td></tr>
+        <tr><td>Vista</td><td>Razor Pages / cshtml</td><td>—</td><td>Motor de plantillas del frontend</td></tr>
+        <tr><td>CSS Framework</td><td>Bootstrap</td><td>5.3</td><td>Estilos responsivos base</td></tr>
+        <tr><td>CSS Personalizado</td><td>site.css (custom)</td><td>—</td><td>Branding SKILLMATCH RD</td></tr>
+        <tr><td>Base de Datos</td><td>SQL Server / SQLite</td><td>—</td><td>Persistencia de datos (Avance 2)</td></tr>
+        <tr><td>ORM</td><td>Entity Framework Core</td><td>10.x</td><td>Mapeo objeto-relacional (Avance 2)</td></tr>
+        <tr><td>Autenticación</td><td>ASP.NET Identity + OAuth 2.0</td><td>—</td><td>Login y sesiones (Avance 2)</td></tr>
+        <tr><td>Control de Versiones</td><td>Git + GitHub</td><td>—</td><td>Repositorio y colaboración</td></tr>
+        <tr><td>IDE</td><td>Visual Studio / VS Code</td><td>2022 / Latest</td><td>Entorno de desarrollo</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Tecnologías Definidas por Capa</h3>
+
+    <p><strong>Backend / Servidor:</strong></p>
+    <span class="tech-badge">C# 13</span>
+    <span class="tech-badge">ASP.NET Core 10</span>
+    <span class="tech-badge">Entity Framework Core</span>
+    <span class="tech-badge">ASP.NET Identity</span>
+    <span class="tech-badge">SQL Server</span>
+
+    <p style="margin-top:12px;"><strong>Frontend / Vista:</strong></p>
+    <span class="tech-badge">Razor / cshtml</span>
+    <span class="tech-badge">Bootstrap 5</span>
+    <span class="tech-badge">jQuery</span>
+    <span class="tech-badge">CSS Custom (site.css)</span>
+    <span class="tech-badge">JavaScript</span>
+
+    <p style="margin-top:12px;"><strong>Metodología y Herramientas:</strong></p>
+    <span class="tech-badge">POO (C#)</span>
+    <span class="tech-badge">Patrón MVC</span>
+    <span class="tech-badge">Git Flow</span>
+    <span class="tech-badge">GitHub</span>
+
+    <h3>Requisitos del Ambiente</h3>
+    <table>
+      <thead>
+        <tr><th>Herramienta</th><th>Versión mínima</th><th>Notas</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>.NET SDK</td><td>10.0</td><td>Requerido para compilar y ejecutar el proyecto</td></tr>
+        <tr><td>Visual Studio</td><td>2022 (v17.x)</td><td>Con workload "ASP.NET and web development"</td></tr>
+        <tr><td>SQL Server</td><td>2019 o Express</td><td>Para base de datos local (Avance 2)</td></tr>
+        <tr><td>Git</td><td>2.x</td><td>Control de versiones</td></tr>
+        <tr><td>Navegador</td><td>Chrome / Edge</td><td>Pruebas de frontend</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Cómo Ejecutar el Proyecto</h3>
+    <table>
+      <thead>
+        <tr><th>Paso</th><th>Comando / Acción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1. Clonar repositorio</td><td><code>git clone https://github.com/usuario/skillmatch-rd.git</code></td></tr>
+        <tr><td>2. Abrir solución</td><td>Abrir <code>SKILLMATCH_RD.csproj</code> en Visual Studio</td></tr>
+        <tr><td>3. Restaurar paquetes</td><td><code>dotnet restore</code></td></tr>
+        <tr><td>4. Ejecutar proyecto</td><td><code>dotnet run</code> o F5 en Visual Studio</td></tr>
+        <tr><td>5. Ver en navegador</td><td>Navegar a <code>https://localhost:5001</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 6. ROADMAP ─── -->
+  <div class="section" id="s6">
+    <div class="section-number">Sección 06</div>
+    <h2>Roadmap Técnico</h2>
+
+    <p>
+      El desarrollo está planificado en <strong>3 avances principales</strong> con entregables
+      concretos en cada fase, totalizando aproximadamente <strong>13 semanas</strong> de trabajo.
+    </p>
+
+    <div class="roadmap-item">
+      <div class="roadmap-phase" style="background:#065f46;">
+        ✓ AVANCE 1<br/><small>Feb–Mar 2026</small>
+      </div>
+      <div class="roadmap-content">
+        <h4>Inicio del Proyecto y Configuración Base</h4>
+        <p>Repositorio GitHub · Estructura MVC · Modelos POO (7 clases) · Controladores base · Vistas iniciales de todos los módulos · Layout y CSS personalizado · Roadmap técnico.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="roadmap-phase" style="background:#1d4ed8;">
+        AVANCE 2<br/><small>Mar–May 2026</small>
+      </div>
+      <div class="roadmap-content">
+        <h4>Base de Datos, Autenticación y Motor de Matching</h4>
+        <p>Entity Framework Core + SQL Server · Migraciones y seed de datos · ASP.NET Identity (login por rol) · OAuth 2.0 · Algoritmo de matching (puntuación por aptitudes) · CRUD completo de Ofertas y Estudiantes · API de gestión de solicitudes.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="roadmap-phase" style="background:#7c3aed;">
+        AVANCE 3<br/><small>May–Jun 2026</small>
+      </div>
+      <div class="roadmap-content">
+        <h4>Funcionalidades Avanzadas, Testing y Despliegue</h4>
+        <p>Notificaciones por email (SendGrid) · Panel de universidades · Reportes y estadísticas · Unit Tests e Integration Tests · Despliegue en servidor (Azure / DigitalOcean) · Documentación técnica y manual de usuario.</p>
+      </div>
+    </div>
+
+    <h3>Desglose de Semanas</h3>
+    <table>
+      <thead>
+        <tr><th>Semanas</th><th>Fase</th><th>Actividades</th><th>Estado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1–2</td><td>Planificación</td><td>Setup repositorio, diseño de BD, arquitectura MVC, modelos POO</td><td><span class="chip chip-done">Completado</span></td></tr>
+        <tr><td>3–4</td><td>Estructura Base</td><td>Controladores, vistas base, layout, CSS personalizado</td><td><span class="chip chip-done">Completado</span></td></tr>
+        <tr><td>5–6</td><td>Base de Datos</td><td>EF Core, migraciones, seed de datos, repositorios</td><td><span class="chip chip-todo">Próximo</span></td></tr>
+        <tr><td>7–8</td><td>Autenticación</td><td>ASP.NET Identity, roles, OAuth 2.0, sesiones</td><td><span class="chip chip-todo">Próximo</span></td></tr>
+        <tr><td>9–10</td><td>Motor de Matching</td><td>Algoritmo de compatibilidad, NLP básico, scoring</td><td><span class="chip chip-todo">Próximo</span></td></tr>
+        <tr><td>11</td><td>Testing</td><td>Unit tests, integration tests, pruebas de UI</td><td><span class="chip chip-todo">Próximo</span></td></tr>
+        <tr><td>12–13</td><td>Deploy y Docs</td><td>Despliegue en nube, documentación final, email</td><td><span class="chip chip-todo">Próximo</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 7. METODOLOGÍA POO ─── -->
+  <div class="section" id="s7">
+    <div class="section-number">Sección 07</div>
+    <h2>Metodología de Organización: POO (C#)</h2>
+
+    <p>
+      El código está organizado siguiendo los principios de la
+      <strong>Programación Orientada a Objetos (POO)</strong> en C#, combinada con el
+      patrón arquitectónico <strong>MVC (Modelo-Vista-Controlador)</strong>.
+    </p>
+
+    <h3>Clases del Modelo de Dominio</h3>
+    <table>
+      <thead>
+        <tr><th>Clase</th><th>Archivo</th><th>Propiedades Principales</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Estudiante</strong></td>
+          <td><code>Models/Estudiante.cs</code></td>
+          <td>Id, NombreCompleto, Matricula, Carrera, Semestre, Aptitudes, Solicitudes</td>
+        </tr>
+        <tr>
+          <td><strong>Empresa</strong></td>
+          <td><code>Models/Empresa.cs</code></td>
+          <td>Id, Nombre, Sector, Ciudad, Email, Ofertas</td>
+        </tr>
+        <tr>
+          <td><strong>Oferta</strong></td>
+          <td><code>Models/Oferta.cs</code></td>
+          <td>Id, Titulo, Tipo (Enum), CarreraRequerida, SemestreMinimo, AptitudesRequeridas</td>
+        </tr>
+        <tr>
+          <td><strong>Aptitud</strong></td>
+          <td><code>Models/Aptitud.cs</code></td>
+          <td>Id, Nombre, Categoria (Técnica/Blanda/Idioma)</td>
+        </tr>
+        <tr>
+          <td><strong>Universidad</strong></td>
+          <td><code>Models/Universidad.cs</code></td>
+          <td>Id, Nombre, Tipo, Ciudad, Estudiantes</td>
+        </tr>
+        <tr>
+          <td><strong>Solicitud</strong></td>
+          <td><code>Models/Solicitud.cs</code></td>
+          <td>Id, EstudianteId, OfertaId, Estado (Enum), PorcentajeMatch, EstadoTexto</td>
+        </tr>
+        <tr>
+          <td><strong>MatchResult</strong></td>
+          <td><code>Models/MatchResult.cs</code></td>
+          <td>PorcentajeCompatibilidad, NivelMatch, ClaseMatch, AptitudesCoincidentes/Faltantes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Principios POO Aplicados</h3>
+    <table>
+      <thead>
+        <tr><th>Principio</th><th>Aplicación en SKILLMATCH RD</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Encapsulamiento</strong></td>
+          <td>Propiedades con <code>get/set</code> controlados. Lógica de negocio dentro de cada clase (ej: <code>NombreCompleto</code>, <code>EstadoTexto</code>, <code>NivelMatch</code>).</td>
+        </tr>
+        <tr>
+          <td><strong>Abstracción</strong></td>
+          <td>Cada clase representa un concepto del dominio (Estudiante, Empresa, Oferta) ocultando detalles de implementación.</td>
+        </tr>
+        <tr>
+          <td><strong>Relaciones entre Objetos</strong></td>
+          <td>Un <code>Estudiante</code> tiene muchas <code>Aptitudes</code> y muchas <code>Solicitudes</code>. Una <code>Oferta</code> pertenece a una <code>Empresa</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>Enumeraciones</strong></td>
+          <td><code>TipoOferta</code>, <code>EstadoSolicitud</code>, <code>TipoUsuario</code> garantizan valores controlados y legibles.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ─── 8. ESTADO ─── -->
+  <div class="section" id="s8">
+    <div class="section-number">Sección 08</div>
+    <h2>Estado del Avance 1</h2>
+
+    <table>
+      <thead>
+        <tr><th>Requisito del Avance 1</th><th>Estado</th><th>Detalle</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Configuración del repositorio (GitHub)</td>
+          <td><span class="chip chip-done">Completado</span></td>
+          <td>Repositorio GitHub creado con ramas main / develop. Link en Sección 02.</td>
+        </tr>
+        <tr>
+          <td>Estructura inicial del proyecto (carpetas, tecnologías)</td>
+          <td><span class="chip chip-done">Completado</span></td>
+          <td>ASP.NET Core MVC .NET 10, carpetas Controllers / Models / Views / wwwroot definidas y pobladas.</td>
+        </tr>
+        <tr>
+          <td>Pantallas o módulos creados (aunque estén en blanco)</td>
+          <td><span class="chip chip-done">Completado</span></td>
+          <td>10 vistas Razor creadas para los 8 módulos. Landing page, registro, dashboard y formularios funcionales.</td>
+        </tr>
+        <tr>
+          <td>Configuración del entorno de desarrollo</td>
+          <td><span class="chip chip-done">Completado</span></td>
+          <td>Stack definido: .NET 10, C#, Bootstrap 5, Git. appsettings.json configurado. Instrucciones de instalación documentadas.</td>
+        </tr>
+        <tr>
+          <td>Roadmap técnico</td>
+          <td><span class="chip chip-done">Completado</span></td>
+          <td>3 fases / 13 semanas documentadas con actividades específicas por semana. Ver Sección 06.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Próximos Pasos (Avance 2)</h3>
+    <ul style="padding-left:20px;line-height:2;">
+      <li>Integrar <strong>Entity Framework Core</strong> y crear la base de datos SQL Server</li>
+      <li>Implementar <strong>ASP.NET Identity</strong> para autenticación por roles</li>
+      <li>Desarrollar el <strong>algoritmo de matching</strong> basado en aptitudes</li>
+      <li>CRUD completo para Estudiantes, Empresas y Ofertas con base de datos real</li>
+      <li>Implementar flujo de postulación (Solicitudes)</li>
+    </ul>
+  </div>
+
+  <!-- FIRMAS -->
+  <div class="signatures">
+    <div class="sig-box">
+      <div class="sig-line">Adrian Reyes</div>
+      <div class="sig-sub">Matrícula: 2023-1100 &mdash; Tech Lead / Backend</div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-line">Michael Sanchez</div>
+      <div class="sig-sub">Matrícula: 2019-9132 &mdash; Frontend / QA</div>
+    </div>
+  </div>
+
+  <p style="text-align:center;margin-top:40px;font-size:0.8rem;color:#aaa;">
+    SKILLMATCH RD &mdash; Proyecto Final TDS &mdash; ITLA &mdash; 2026
+  </p>
+
+</div>
+</body>
+</html>
