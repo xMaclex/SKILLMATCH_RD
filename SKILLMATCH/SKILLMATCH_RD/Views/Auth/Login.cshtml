@@ -1,0 +1,87 @@
+@{
+    ViewData["Title"] = "Iniciar Sesion";
+    Layout = "_Layout";
+}
+
+<div style="min-height:80vh;display:flex;align-items:center;background:linear-gradient(135deg,#003087 0%,#0056D2 100%);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-white mb-1" style="font-size:1.8rem;">SKILLMATCH RD</h2>
+                    <p class="text-white opacity-75 small">Ingresa a tu cuenta para continuar</p>
+                </div>
+
+                <div class="card border-0 shadow-lg rounded-4 p-4">
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger py-2 small mb-3">@ViewBag.Error</div>
+                    }
+
+                    <!-- Tabs tipo de usuario -->
+                    <ul class="nav nav-pills nav-fill mb-4" id="loginTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active fw-semibold" id="tab-estudiante" href="#"
+                               onclick="setTipo('Estudiante', this); return false;">
+                                Estudiante
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-semibold" id="tab-empresa" href="#"
+                               onclick="setTipo('Empresa', this); return false;">
+                                Empresa
+                            </a>
+                        </li>
+                    </ul>
+
+                    <form asp-action="Login" method="post">
+                        <input type="hidden" name="tipo" id="tipoInput" value="Estudiante" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Correo Electronico</label>
+                            <input type="email" name="email" class="form-control"
+                                   placeholder="tucorreo@itla.edu.do" required autofocus />
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold small">Contrasena</label>
+                            <input type="password" name="password" class="form-control"
+                                   placeholder="••••••••" required />
+                        </div>
+
+                        <button type="submit" class="btn w-100 py-2 fw-bold"
+                                style="background:var(--sm-primary);color:white;border-radius:8px;">
+                            Entrar
+                        </button>
+                    </form>
+
+                    <hr class="my-3" />
+
+                    <p class="text-center text-muted small mb-0">
+                        No tienes cuenta?
+                        <a asp-controller="Estudiantes" asp-action="Registro" style="color:var(--sm-primary);">
+                            Registrate aqui
+                        </a>
+                    </p>
+                </div>
+
+                <p class="text-center text-white opacity-50 small mt-3">
+                    ITLA &bull; Proyecto Final TDS &bull; 2026
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    function setTipo(tipo, el) {
+        document.getElementById('tipoInput').value = tipo;
+        document.querySelectorAll('#loginTabs .nav-link').forEach(a => a.classList.remove('active'));
+        el.classList.add('active');
+    }
+</script>
+}

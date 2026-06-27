@@ -3,10 +3,10 @@
 }
 
 <div class="page-header">
-    <div class="container d-flex justify-content-between align-items-center">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
         <div>
-            <h2>Panel de Empresa</h2>
-            <p class="text-muted mb-0">Gestiona tus ofertas y revisa candidatos</p>
+            <h2>Panel de @ViewBag.NombreEmpresa</h2>
+            <p class="text-muted mb-0">Gestiona tus ofertas y revisa los candidatos recomendados</p>
         </div>
         <a asp-controller="Ofertas" asp-action="Crear" class="btn btn-skillmatch">
             + Publicar Oferta
@@ -15,35 +15,81 @@
 </div>
 
 <div class="container">
-    <div class="row g-4 mb-4">
-        <div class="col-md-3">
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success mb-4">@TempData["Mensaje"]</div>
+    }
+
+    <!-- Estadisticas -->
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
             <div class="card border-0 shadow-sm text-center p-3">
-                <div class="stat-number">0</div>
+                <div class="stat-number text-primary">@ViewBag.OfertasActivas</div>
                 <div class="stat-label">Ofertas Activas</div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-6 col-md-3">
             <div class="card border-0 shadow-sm text-center p-3">
-                <div class="stat-number">0</div>
+                <div class="stat-number" style="color:var(--sm-primary);">@ViewBag.SolicitudesTotal</div>
                 <div class="stat-label">Solicitudes Recibidas</div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-6 col-md-3">
             <div class="card border-0 shadow-sm text-center p-3">
-                <div class="stat-number">0</div>
-                <div class="stat-label">Candidatos en Revision</div>
+                <div class="stat-number text-warning">@ViewBag.EnRevision</div>
+                <div class="stat-label">En Revision</div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-6 col-md-3">
             <div class="card border-0 shadow-sm text-center p-3">
-                <div class="stat-number">0</div>
+                <div class="stat-number text-success">@ViewBag.Colocaciones</div>
                 <div class="stat-label">Colocaciones</div>
             </div>
         </div>
     </div>
 
+    <!-- Candidatos recomendados -->
     <div class="card border-0 shadow-sm p-4">
-        <h5 class="fw-bold mb-3" style="color:var(--sm-primary);">Mis Ofertas Publicadas</h5>
-        <p class="text-muted">Aun no tienes ofertas publicadas. <a asp-controller="Ofertas" asp-action="Crear">Publica tu primera oferta</a>.</p>
+        <h5 class="fw-bold mb-4" style="color:var(--sm-primary);">Candidatos Recomendados por SKILLMATCH</h5>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead style="background:var(--sm-light);">
+                    <tr>
+                        <th style="color:var(--sm-primary);">Estudiante</th>
+                        <th style="color:var(--sm-primary);">Carrera</th>
+                        <th style="color:var(--sm-primary);">Semestre</th>
+                        <th style="color:var(--sm-primary);">Oferta</th>
+                        <th style="color:var(--sm-primary);">Compatibilidad</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (dynamic c in ViewBag.Candidatos)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@c.Nombre</td>
+                            <td class="text-muted small">@c.Carrera</td>
+                            <td class="text-center">@c.Semestre</td>
+                            <td class="small">@c.Oferta</td>
+                            <td style="min-width:140px;">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" style="height:8px;">
+                                        <div class="progress-bar @(c.Match >= 85 ? "bg-success" : c.Match >= 70 ? "bg-primary" : "bg-warning")"
+                                             style="width:@(c.Match)%"></div>
+                                    </div>
+                                    <span class="fw-bold small @(c.Match >= 85 ? "text-success" : "text-primary")">@(c.Match)%</span>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-skillmatch-outline">Ver Perfil</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>

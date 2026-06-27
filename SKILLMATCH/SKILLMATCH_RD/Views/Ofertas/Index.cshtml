@@ -1,67 +1,92 @@
+@model List<SKILLMATCH_RD.Models.Oferta>
 @{
     ViewData["Title"] = "Ofertas Disponibles";
+    string tipoFiltro    = ViewBag.TipoFiltro    as string ?? "";
+    string carreraFiltro = ViewBag.CarreraFiltro as string ?? "";
 }
 
 <div class="page-header">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div>
-            <h2>Ofertas Disponibles</h2>
-            <p class="text-muted mb-0">Empleos y pasantias para estudiantes del ITLA y universidades tecnicas</p>
-        </div>
-        <div class="d-flex gap-2">
-            <select class="form-select" style="width:auto;">
-                <option>Todos los tipos</option>
-                <option>Empleo</option>
-                <option>Pasantia</option>
-            </select>
-            <select class="form-select" style="width:auto;">
-                <option>Todas las carreras</option>
-                <option>Desarrollo de Software</option>
-                <option>Redes</option>
-                <option>Soporte Tecnico</option>
-            </select>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <h2>Ofertas Disponibles</h2>
+                <p class="text-muted mb-0">@ViewBag.TotalOfertas ofertas activas para estudiantes del ITLA</p>
+            </div>
+            <form method="get" class="d-flex gap-2 flex-wrap">
+                <select name="tipo" class="form-select" style="width:auto;" onchange="this.form.submit()">
+                    <option value="">Todos los tipos</option>
+                    @if (tipoFiltro == "Empleo") { <option value="Empleo" selected>Empleo</option> } else { <option value="Empleo">Empleo</option> }
+                    @if (tipoFiltro == "Pasantia") { <option value="Pasantia" selected>Pasantia</option> } else { <option value="Pasantia">Pasantia</option> }
+                </select>
+                <select name="carrera" class="form-select" style="width:auto;" onchange="this.form.submit()">
+                    <option value="">Todas las carreras</option>
+                    @{
+                        var carreras = new[] { "Desarrollo de Software", "Redes y Telecomunicaciones", "Soporte Tecnico", "Seguridad Informatica", "Diseno Grafico" };
+                        foreach (var c in carreras)
+                        {
+                            if (carreraFiltro == c) { <option value="@c" selected>@c</option> } else { <option value="@c">@c</option> }
+                        }
+                    }
+                </select>
+            </form>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="alert alert-info mb-4">
-        Las ofertas se cargaran aqui una vez que las empresas registradas comiencen a publicarlas.
-        <a asp-controller="Empresas" asp-action="Registro">Eres empresa? Registrate aqui.</a>
-    </div>
 
-    <!-- Placeholder de oferta de ejemplo -->
-    <div class="row g-3" style="opacity:0.5;pointer-events:none;">
-        <div class="col-md-6">
-            <div class="card border-0 shadow-sm p-3">
-                <div class="d-flex justify-content-between">
-                    <span class="badge" style="background:var(--sm-primary);color:white;">Pasantia</span>
-                    <span class="text-muted small">Hace 2 dias</span>
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success mb-4">@TempData["Mensaje"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No se encontraron ofertas con esos filtros.</div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var oferta in Model)
+            {
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100 p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            @if (oferta.Tipo == SKILLMATCH_RD.Models.Enums.TipoOferta.Pasantia)
+                            {
+                                <span class="badge badge-pasantia">Pasantia</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-empleo">Empleo</span>
+                            }
+                            <span class="text-muted small">Hace @((DateTime.Now - oferta.FechaPublicacion).Days) dias</span>
+                        </div>
+
+                        <h6 class="fw-bold mb-1">@oferta.Titulo</h6>
+                        <p class="text-muted small mb-1">
+                            <strong>@oferta.Empresa?.Nombre</strong> &bull; @oferta.Empresa?.Ciudad &bull; @oferta.Modalidad
+                        </p>
+                        <p class="text-muted small mb-2">Carrera: @oferta.CarreraRequerida &bull; Desde semestre @oferta.SemestreMinimo</p>
+
+                        <p class="small text-secondary mb-3">@oferta.Descripcion</p>
+
+                        <div class="d-flex gap-1 flex-wrap mb-3">
+                            @foreach (var apt in oferta.AptitudesRequeridas)
+                            {
+                                <span class="badge bg-light text-dark border">@apt.Nombre</span>
+                            }
+                        </div>
+
+                        <div class="d-flex gap-2 mt-auto">
+                            <a asp-action="Detalle" asp-route-id="@oferta.Id"
+                               class="btn btn-skillmatch-outline btn-sm">Ver Detalle</a>
+                            <a asp-controller="Auth" asp-action="Login"
+                               class="btn btn-skillmatch btn-sm">Aplicar</a>
+                        </div>
+                    </div>
                 </div>
-                <h6 class="fw-bold mt-2 mb-1">Desarrollador Web Junior</h6>
-                <p class="text-muted small mb-2">TechCorp RD &bull; Santo Domingo &bull; Presencial</p>
-                <div class="d-flex gap-1 flex-wrap mb-3">
-                    <span class="badge bg-light text-dark">C#</span>
-                    <span class="badge bg-light text-dark">SQL</span>
-                    <span class="badge bg-light text-dark">HTML/CSS</span>
-                </div>
-                <a class="btn btn-skillmatch-outline btn-sm">Ver Detalle</a>
-            </div>
+            }
         </div>
-        <div class="col-md-6">
-            <div class="card border-0 shadow-sm p-3">
-                <div class="d-flex justify-content-between">
-                    <span class="badge" style="background:#0d9488;color:white;">Empleo</span>
-                    <span class="text-muted small">Hace 5 dias</span>
-                </div>
-                <h6 class="fw-bold mt-2 mb-1">Tecnico de Soporte IT</h6>
-                <p class="text-muted small mb-2">Banco Digital RD &bull; Santiago &bull; Hibrido</p>
-                <div class="d-flex gap-1 flex-wrap mb-3">
-                    <span class="badge bg-light text-dark">Windows Server</span>
-                    <span class="badge bg-light text-dark">Redes</span>
-                </div>
-                <a class="btn btn-skillmatch-outline btn-sm">Ver Detalle</a>
-            </div>
-        </div>
-    </div>
+    }
 </div>

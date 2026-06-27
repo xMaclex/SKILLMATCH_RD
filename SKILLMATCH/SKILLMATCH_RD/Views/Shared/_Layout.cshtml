@@ -51,17 +51,33 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Estudiantes" asp-action="Registro">
-                                Soy Estudiante
-                            </a>
-                        </li>
-                        <li class="nav-item ms-2">
-                            <a class="btn btn-sm" style="background:#C8102E;color:white;padding:6px 14px;border-radius:6px;"
-                               asp-controller="Empresas" asp-action="Registro">
-                                Soy Empresa
-                            </a>
-                        </li>
+                        @if (Context.Session.GetString("UsuarioNombre") != null)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    @Context.Session.GetString("UsuarioNombre")
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><span class="dropdown-item-text text-muted small">@Context.Session.GetString("UsuarioTipo")</span></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Cerrar Sesion</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Login">
+                                    Iniciar Sesion
+                                </a>
+                            </li>
+                            <li class="nav-item ms-2">
+                                <a class="btn btn-sm" style="background:#C8102E;color:white;padding:6px 14px;border-radius:6px;"
+                                   asp-controller="Estudiantes" asp-action="Registro">
+                                    Registrarme
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

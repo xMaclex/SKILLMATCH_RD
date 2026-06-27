@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "SKILLMATCH_RD/1.0.0": {
+        "runtime": {
+          "SKILLMATCH_RD.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SKILLMATCH_RD/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
