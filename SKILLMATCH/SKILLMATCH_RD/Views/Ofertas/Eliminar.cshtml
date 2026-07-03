@@ -1,0 +1,32 @@
+@model SKILLMATCH_RD.Models.Oferta
+@{
+    ViewData["Title"] = "Eliminar Oferta";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h2>Eliminar Oferta</h2>
+        <p class="text-muted mb-0">Esta accion no se puede deshacer</p>
+    </div>
+</div>
+
+<div class="container" style="max-width:640px;">
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+        <div class="alert alert-danger">
+            &iquest;Seguro que deseas eliminar esta oferta de forma permanente?
+        </div>
+
+        <h5 class="fw-bold mb-1">@Model.Titulo</h5>
+        <p class="text-muted mb-1"><strong>@Model.Empresa?.Nombre</strong> &bull; @Model.Empresa?.Ciudad</p>
+        <p class="text-muted small mb-1">Carrera: @Model.CarreraRequerida &bull; Desde semestre @Model.SemestreMinimo</p>
+        <p class="small text-secondary mb-4">@Model.Descripcion</p>
+
+        <form asp-action="Eliminar" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-danger py-2 px-4">Si, eliminar</button>
+                <a asp-action="Index" class="btn btn-outline-secondary py-2 px-4">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

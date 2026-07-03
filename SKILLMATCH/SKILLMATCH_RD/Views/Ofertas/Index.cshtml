@@ -78,11 +78,15 @@
                             }
                         </div>
 
-                        <div class="d-flex gap-2 mt-auto">
+                        <div class="d-flex gap-2 mt-auto flex-wrap">
                             <a asp-action="Detalle" asp-route-id="@oferta.Id"
                                class="btn btn-skillmatch-outline btn-sm">Ver Detalle</a>
                             <a asp-controller="Auth" asp-action="Login"
                                class="btn btn-skillmatch btn-sm">Aplicar</a>
+                            <a asp-action="Editar" asp-route-id="@oferta.Id"
+                               class="btn btn-outline-secondary btn-sm">Editar</a>
+                            <a asp-action="Eliminar" asp-route-id="@oferta.Id"
+                               class="btn btn-outline-danger btn-sm">Eliminar</a>
                         </div>
                     </div>
                 </div>

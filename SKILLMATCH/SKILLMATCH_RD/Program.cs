@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using SKILLMATCH_RD.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
@@ -8,7 +11,19 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// Base de datos SQLite (Avance 3)
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("Default")
+                      ?? "Data Source=skillmatch.db"));
+
 var app = builder.Build();
+
+// Crea la base de datos y siembra los datos iniciales al arrancar
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    DbInitializer.Seed(db);
+}
 
 if (!app.Environment.IsDevelopment())
 {

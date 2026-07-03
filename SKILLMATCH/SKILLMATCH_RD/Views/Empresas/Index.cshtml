@@ -1,16 +1,44 @@
+@model List<SKILLMATCH_RD.Models.Empresa>
 @{
-    ViewData["Title"] = "Para Empresas";
+    ViewData["Title"] = "Empresas Registradas";
 }
 
 <div class="page-header">
     <div class="container">
-        <h2>Portal de Empresas</h2>
-        <p class="text-muted mb-0">Encuentra el talento tecnico que tu empresa necesita</p>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <h2>Empresas Registradas</h2>
+                <p class="text-muted mb-0">@Model.Count empresas en la base de datos</p>
+            </div>
+            <a asp-action="Registro" class="btn btn-skillmatch">+ Registrar Empresa</a>
+        </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="alert alert-info">
-        <a asp-action="Registro">Registra tu empresa</a> para comenzar a publicar ofertas y recibir candidatos calificados.
-    </div>
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success mb-4">@TempData["Mensaje"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Aun no hay empresas registradas.</div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var e in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm h-100 p-3">
+                        <h6 class="fw-bold mb-1">@e.Nombre</h6>
+                        <p class="text-muted small mb-1">@e.Sector &bull; @e.Ciudad</p>
+                        <p class="text-muted small mb-2">@e.Email</p>
+                        <span class="badge bg-light text-dark border align-self-start">@e.Ofertas.Count ofertas publicadas</span>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>

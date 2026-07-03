@@ -1,17 +1,71 @@
+@model List<SKILLMATCH_RD.Models.Estudiante>
 @{
-    ViewData["Title"] = "Mi Perfil";
+    ViewData["Title"] = "Estudiantes Registrados";
 }
 
 <div class="page-header">
     <div class="container">
-        <h2>Mi Perfil de Estudiante</h2>
-        <p class="text-muted mb-0">Gestiona tu informacion y revisa tus recomendaciones</p>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <h2>Estudiantes Registrados</h2>
+                <p class="text-muted mb-0">@Model.Count estudiantes en la base de datos</p>
+            </div>
+            <a asp-action="Registro" class="btn btn-skillmatch">+ Nuevo Estudiante</a>
+        </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="alert alert-info d-flex align-items-center" role="alert">
-        <span class="me-2">&#128274;</span>
-        <div>Modulo en desarrollo. Para continuar <a asp-action="Registro">registrate aqui</a>.</div>
-    </div>
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success mb-4">@TempData["Mensaje"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Aun no hay estudiantes registrados.</div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Matricula</th>
+                            <th>Carrera</th>
+                            <th class="text-center">Semestre</th>
+                            <th>Aptitudes</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var e in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="fw-semibold">@e.NombreCompleto</div>
+                                    <div class="text-muted small">@e.Email</div>
+                                </td>
+                                <td>@e.Matricula</td>
+                                <td>@e.Carrera</td>
+                                <td class="text-center">@e.SemestreActual</td>
+                                <td>
+                                    @foreach (var a in e.Aptitudes.Take(3))
+                                    {
+                                        <span class="badge bg-light text-dark border">@a.Nombre</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    <a asp-action="Perfil" asp-route-id="@e.Id" class="btn btn-skillmatch-outline btn-sm">Ver</a>
+                                    <a asp-action="Eliminar" asp-route-id="@e.Id" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
 </div>
