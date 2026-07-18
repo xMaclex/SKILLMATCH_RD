@@ -61,7 +61,7 @@
 
                     <p class="text-center text-muted small mb-0">
                         No tienes cuenta?
-                        <a asp-controller="Estudiantes" asp-action="Registro" style="color:var(--sm-primary);">
+                        <a id="registroLink" asp-controller="Estudiantes" asp-action="Registro" style="color:var(--sm-primary);">
                             Registrate aqui
                         </a>
                     </p>
@@ -78,10 +78,15 @@
 
 @section Scripts {
 <script>
-    function setTipo(tipo, el) {
+        function setTipo(tipo, el) {
         document.getElementById('tipoInput').value = tipo;
         document.querySelectorAll('#loginTabs .nav-link').forEach(a => a.classList.remove('active'));
         el.classList.add('active');
+
+        var link = document.getElementById('registroLink');
+        link.href = (tipo === 'Empresa')
+            ? '@Url.Action("Registro", "Empresas")'
+            : '@Url.Action("Registro", "Estudiantes")';
     }
 </script>
 }

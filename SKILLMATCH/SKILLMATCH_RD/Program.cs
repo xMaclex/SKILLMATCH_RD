@@ -3,6 +3,8 @@ using SKILLMATCH_RD.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://localhost:5105");
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession(options =>
 {

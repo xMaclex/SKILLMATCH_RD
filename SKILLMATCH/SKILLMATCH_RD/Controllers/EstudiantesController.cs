@@ -9,8 +9,45 @@ namespace SKILLMATCH_RD.Controllers;
 public class EstudiantesController : Controller
 {
     private readonly AppDbContext _db;
+    private readonly IWebHostEnvironment _env;
 
-    public EstudiantesController(AppDbContext db) => _db = db;
+    public EstudiantesController(AppDbContext db, IWebHostEnvironment env)
+    {
+        _db = db;
+        _env = env;
+    }
+
+    private static readonly string[] ExtensionesCv = { ".pdf", ".doc", ".docx" };
+    private static readonly string[] ExtensionesPortafolio = { ".pdf", ".zip", ".png", ".jpg", ".jpeg" };
+    private const long TamanoMaximoBytes = 5 * 1024 * 1024; // 5 MB
+
+    // Guarda un archivo en wwwroot/uploads/{carpeta} y devuelve la ruta relativa (o null si no se subió nada).
+    private string? GuardarArchivo(IFormFile? archivo, string carpeta, string[] extensionesPermitidas)
+    {
+        if (archivo == null || archivo.Length == 0)
+            return null;
+
+        var extension = Path.GetExtension(archivo.FileName).ToLowerInvariant();
+
+        if (!extensionesPermitidas.Contains(extension))
+            throw new InvalidOperationException($"Formato no permitido ({extension}). Formatos válidos: {string.Join(", ", extensionesPermitidas)}");
+
+        if (archivo.Length > TamanoMaximoBytes)
+            throw new InvalidOperationException("El archivo supera el tamaño máximo permitido (5 MB).");
+
+        var carpetaDestino = Path.Combine(_env.WebRootPath, "uploads", carpeta);
+        Directory.CreateDirectory(carpetaDestino);
+
+        var nombreArchivo = $"{Guid.NewGuid()}{extension}";
+        var rutaCompleta = Path.Combine(carpetaDestino, nombreArchivo);
+
+        using (var stream = new FileStream(rutaCompleta, FileMode.Create))
+        {
+            archivo.CopyTo(stream);
+        }
+
+        return $"/uploads/{carpeta}/{nombreArchivo}";
+    }
 
     // READ - listado de estudiantes registrados (CRUD)
     public IActionResult Index()
@@ -25,19 +62,29 @@ public class EstudiantesController : Controller
     }
 
     // CREATE - formulario
-    public IActionResult Registro()
+     public IActionResult Registro()
     {
         return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Registro(Estudiante estudiante)
+    public IActionResult Registro(Estudiante estudiante, IFormFile? cvArchivo, IFormFile? portafolioArchivo)
     {
         if (!ModelState.IsValid)
             return View(estudiante);
 
-        // Asocia al estudiante con la universidad ITLA sembrada por defecto.
+        try
+        {
+            estudiante.CvUrl = GuardarArchivo(cvArchivo, "cv", ExtensionesCv) ?? estudiante.CvUrl;
+            estudiante.PortafolioUrl = GuardarArchivo(portafolioArchivo, "portafolio", ExtensionesPortafolio) ?? estudiante.PortafolioUrl;
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View(estudiante);
+        }
+
         var itla = _db.Universidades.OrderBy(u => u.Id).FirstOrDefault();
         if (itla != null)
             estudiante.UniversidadId = itla.Id;
@@ -52,6 +99,33 @@ public class EstudiantesController : Controller
 
         TempData["Mensaje"] = "Perfil creado exitosamente.";
         return RedirectToAction("MisOfertas");
+    }
+
+    // NUEVO: actualizar CV/Portafolio desde la página de Perfil
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult ActualizarDocumentos(int id, IFormFile? cvArchivo, IFormFile? portafolioArchivo)
+    {
+        var estudiante = _db.Estudiantes.Find(id);
+        if (estudiante == null) return NotFound();
+
+        try
+        {
+            var nuevoCv = GuardarArchivo(cvArchivo, "cv", ExtensionesCv);
+            var nuevoPortafolio = GuardarArchivo(portafolioArchivo, "portafolio", ExtensionesPortafolio);
+
+            if (nuevoCv != null) estudiante.CvUrl = nuevoCv;
+            if (nuevoPortafolio != null) estudiante.PortafolioUrl = nuevoPortafolio;
+
+            _db.SaveChanges();
+            TempData["Mensaje"] = "Documentos actualizados correctamente.";
+        }
+        catch (InvalidOperationException ex)
+        {
+            TempData["Error"] = ex.Message;
+        }
+
+        return RedirectToAction("Perfil", new { id });
     }
 
     // READ - detalle de un estudiante

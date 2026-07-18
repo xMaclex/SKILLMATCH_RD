@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SKILLMATCH_RD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c34fdffe0d3513f70e5ce8ca6ab0e979f59e39b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("SKILLMATCH_RD")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SKILLMATCH_RD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

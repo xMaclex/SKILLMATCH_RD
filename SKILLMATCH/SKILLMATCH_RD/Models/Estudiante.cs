@@ -12,6 +12,7 @@ public class Estudiante
     public bool BuscaPasantia { get; set; }
     public bool BuscaEmpleo { get; set; }
     public string? CvUrl { get; set; }
+    public string? PortafolioUrl { get; set; }
     public string? FotoUrl { get; set; }
     public string? Descripcion { get; set; }
     public DateTime FechaRegistro { get; set; } = DateTime.Now;

@@ -12,7 +12,7 @@
 
 <div class="container" style="max-width:680px;">
     <div class="card shadow-sm border-0 rounded-4 p-4">
-        <form asp-action="Registro" method="post">
+        <form asp-action="Registro" method="post" enctype="multipart/form-data">
             <div class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Nombre</label>
@@ -54,6 +54,18 @@
                         }
                     </select>
                 </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Curriculum (CV)</label>
+                    <input type="file" class="form-control" name="cvArchivo" accept=".pdf,.doc,.docx" />
+                    <div class="form-text">PDF o Word, máx. 5MB.</div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Portafolio <span class="text-muted small">(opcional)</span></label>
+                    <input type="file" class="form-control" name="portafolioArchivo" accept=".pdf,.zip,.png,.jpg,.jpeg" />
+                    <div class="form-text">PDF, ZIP o imagen, máx. 5MB.</div>
+                </div>
+                
                 <div class="col-12">
                     <label class="form-label fw-semibold">Descripcion personal</label>
                     <textarea class="form-control" asp-for="Descripcion" rows="3"
